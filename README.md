@@ -39,7 +39,3 @@
 - curl -ik https://localhost:8081/alive
 - curl -ik https://localhost:8081/ready
 - curl -ik -X PUT -H "Content-Type: application/json" -d "{\"lastName\":\"Smith\",\"numBags\":2}" https://localhost:8081/api/v1/tickets/PNR123/checkin
-
-
-paymentID: "PAY-1AKD7482FAB9STATKO"
-paymentID: "PAY-1B56960729604235TKQQIYVY"
