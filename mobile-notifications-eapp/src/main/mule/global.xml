@@ -22,4 +22,14 @@
   <http:listener-config name="apiHttpListenerConfig">
     <http:listener-connection host="0.0.0.0" protocol="HTTP" port="${http.port}"/>
   </http:listener-config>
+  <global-property name="encrypt.key" value="secure12345"/>
+  <anypoint-mq:config name="amqConfig">
+    <anypoint-mq:connection clientId="3478ad19ab124446a987e07185afb2a5" clientSecret="16021f5e2eAC43438f84Eba9A189dbbE" url="https://mq-ap-northeast-1.anypoint.mulesoft.com/api/v1/organizations/93853e26-66b4-4720-959e-0669221d7d14/environments/927d67c9-d087-4658-ac7d-6c5e3bf402d9" />
+</anypoint-mq:config>
+<vm:config name="mobileAppNetworkVMConfig">
+    <vm:queues>
+        <vm:queue queueName="mobile-app-native-notifs-q" />
+    </vm:queues>
+</vm:config>
+
 </mule>
