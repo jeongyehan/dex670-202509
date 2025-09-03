@@ -168,7 +168,7 @@ ns0#checkIn: {
             }]]></ee:set-payload>
         </ee:message>
     </ee:transform>
-    <json:validate-schema doc:name="Validate schema" doc:id="57617816-e5d3-4f9c-a25a-33ec547f3eb7" schema="schemas/FlightCancelledEvent.schema.json"/>
+    <!-- [STUDIO:"Validate schema"]<json:validate-schema doc:name="Validate schema" doc:id="57617816-e5d3-4f9c-a25a-33ec547f3eb7" schema="schemas/FlightCancelledEvent.schema.json"/> [STUDIO] -->
 			<set-variable variableName="msgValid" value="#[true]" doc:name="msgValid = true"/>
 			<error-handler>
         <on-error-continue enableNotifications="false" logException="false">
@@ -179,7 +179,11 @@ ns0#checkIn: {
 </try>
 <choice>
     <when expression="#[vars.msgValid]">
-        <anypoint-mq:publish destination="cancelled-flights-exchg-dev" messageId="#[correlationId]" config-ref="amqConfig"  doc:name="cancelled-flights-exchg-dev" />
+        <anypoint-mq:publish destination="cancelled-flights-exchg-dev" config-ref="amqConfig"  doc:name="cancelled-flights-exchg-dev" >
+					<anypoint-mq:properties ><![CDATA[#[{
+    "correlationId": correlationId
+}]]]></anypoint-mq:properties>
+				</anypoint-mq:publish>
     </when>
 </choice>
 		<error-handler>
