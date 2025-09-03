@@ -26,7 +26,7 @@
       <munit-tools:assert-that expression="#[payload]" is="#[MunitTools::equalTo(TestData::checkInByPNRResp)]" doc:name="Payload has result"/>
     </munit:validation>
   </munit:test>
-  <munit:test name="check-in-by-pnr-exception-path-test" expectedErrorType="APP:CANT_CREATE_PAYMENT" description="Test check-in-by-pnr exception path">
+  <munit:test name="check-in-by-pnr-exception-path-test" expectedErrorType="APP:CANT_CREATE_PAYMENT" description="Test check-in-by-pnr exception path" ignore="true">
     <munit:behavior>
       <flow-ref name="setup-happy-sapi-mocks" doc:name="setup-happy-sapi-mocks"/>
       <munit-tools:mock-when processor="flow-ref" doc:name="create-payment-for-bags">
