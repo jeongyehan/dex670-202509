@@ -142,7 +142,7 @@ ns0#checkIn: {
     <validation:is-true expression="#[var ct = attributes.headers.'content-type' --- ((not isBlank(ct)) and (lower(ct) contains '/xml'))]" doc:name="content-type"/>
 		<xml-module:validate-schema doc:name="schemas/CancellationNotification.xsd" doc:id="df552e0b-b56c-46ae-a503-673dc05670dc" schemas="schemas/CancellationNotification.xsd"/>
 		<logger level="INFO" message="Received Cancellation Notification" doc:name="Received Cancellation Notification" />
-		<vm:publish queueName="flight-cancel-notifs-q" doc:name="flight-cancel-notifs-q" doc:id="c28eeda2-2161-473f-b210-3f399cf6b834" config-ref="vmConfig" sendCorrelationId="ALWAYS"/>
+		<vm:publish queueName="flight-cancel-notifs-q" doc:name="flight-cancel-notifs-q" doc:id="c28eeda2-2161-473f-b210-3f399cf6b834" config-ref="vmConfig"/>
 <error-handler>
     <on-error-continue when="#[['VALIDATION', 'XML-MODULE'] contains error.errorType.namespace]" enableNotifications="true" logException="true">
         <set-variable variableName="httpStatus" value="400" doc:name="httpStatus = 400"/>
@@ -177,15 +177,15 @@ ns0#checkIn: {
         </on-error-continue>
     </error-handler>
 </try>
-<choice>
-    <when expression="#[vars.msgValid]">
+<!-- [STUDIO:"Choice"]<choice>
+    <when expression="#[vars.msgValid&#93;">
         <anypoint-mq:publish destination="cancelled-flights-exchg-dev" config-ref="amqConfig"  doc:name="cancelled-flights-exchg-dev" >
 					<anypoint-mq:properties ><![CDATA[#[{
     "correlationId": correlationId
-}]]]></anypoint-mq:properties>
+}&#93;&#93;&#93;></anypoint-mq:properties>
 				</anypoint-mq:publish>
     </when>
-</choice>
+</choice> [STUDIO] -->
 		<error-handler>
     <on-error-continue type="MULE:REDELIVERY_EXHAUSTED" enableNotifications="false" logException="false">
         <logger level="ERROR" message="Giving up" doc:name="Giving up"/>

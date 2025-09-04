@@ -49,4 +49,5 @@
 - curl -ik -H "Content-Type:text/xml" -d "invalid content type" https://localhost:8081/api/cancelFlight
 - curl -ik -H "Content-Type:text/xml" -d "<CancellationNotification><PNR1>PNR123</PNR1><PassengerLastName2>Mule</PassengerLastName2></CancellationNotification>" https://localhost:8081/api/cancelFlight
 - curl -ik -H "Content-Type:text/xml" -H "X-CORRELATION-ID: KFC12345" -d "<CancellationNotification><PNR>PNR123</PNR><PassengerLastName>Mule</PassengerLastName></CancellationNotification>" https://localhost:8081/api/cancelFlight
+- mvn -B -f bom/pom.xml archetype:generate -DarchetypeGroupId=org.mule.extensions -DarchetypeArtifactId=mule-extensions-xml-archetype -DarchetypeVersion=1.2.0 -DgroupId=319f9561-cf60-490d-8dab-55ae48d87446 -DartifactId=resilience-mule-extension -DmuleConnectorName=resilience-mule-extension -DextensionName=resilience -Dpackage=. -DoutputDirectory=../
 
